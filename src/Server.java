@@ -24,14 +24,14 @@ public class Server {
         int port = 8010;
         Server server = new Server();
 //        socket object
-        try(ServerSocket serverSocket = new ServerSocket(port)){
+        try{
+            ServerSocket serverSocket = new ServerSocket(port);
             serverSocket.setSoTimeout(10000);
             System.out.println("Server socket is running");
             while (true){
                 Socket clientSocket = serverSocket.accept();
                 Thread thread = new Thread(() -> server.getConsumer().accept(clientSocket));
                 thread.start();
-
             }
         }catch (Exception e){
             System.err.println(e);
